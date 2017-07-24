@@ -1,0 +1,6 @@
+$ docker run -i -t ubuntu:12.04 apt-get -y install memcached 		 # install the memcached
+$ docker ps -a 								 # use docker ps -a to find the container_id
+$ docker commit container_id lmj/memcached 				 # commit the container
+$ docker run -d -p 11211 lmj/memcached memcached -u daemon 		 # run it
+$ docker port container_id 11211 					 # show the expose port
+$ docker inspect container_id  						 # show the container info
