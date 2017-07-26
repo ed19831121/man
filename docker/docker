@@ -1,4 +1,13 @@
-    docker attach命令-	登录一个已经在执行的容器 (link is external)
+    先删除依赖该镜像的所有容器，再来删除镜像.
+	docker ps
+	docker rm 	$id
+	docker rmi	
+显示所有 Docker 容器   	docker ps  -aq
+删除所有 Docker 容器	docker rm  $(docker ps -a -q)
+删除所有 Docker 镜像	docker rmi $(docker images -q)
+
+
+	docker attach命令-	登录一个已经在执行的容器 (link is external)
     docker build 命令-	建立一个新的image (link is external)
     docker commit命令-	提交一个新的image (link is external)
     docker cp命令-	将容器中的文件拷贝到主机上 (link is external)
