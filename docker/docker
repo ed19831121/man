@@ -201,16 +201,78 @@ system      Manage Docker
 
 Commands:
   attach      Attach local standard input, output, and error streams to [a running container]
-  build       Build 	{an    	image} 	from a Dockerfile
+  build [OPTIONS] PATH | URL | -       Build 	{an    	image} 	from a Dockerfile
+		--add-host 	list              Add a custom host-to-IP mapping (host:ip)
+      		--build-arg 	list             Set build-time variables
+      		--cache-from 	stringSlice     Images to consider as cache sources
+      		--cgroup-parent string       Optional parent cgroup for the container
+      		--compress                   Compress the build context using gzip
+      		--cpu-period 	int             Limit the CPU CFS (Completely Fair Scheduler) period
+      		--cpu-quota 	int              Limit the CPU CFS (Completely Fair Scheduler) quota
+  	-c, 	--cpu-shares 	int             CPU shares (relative weight)
+      		--cpuset-cpus 	string         CPUs in which to allow execution (0-3, 0,1)
+      		--cpuset-mems 	string         MEMs in which to allow execution (0-3, 0,1)
+      		--disable-content-trust      Skip image verification (default true)
+  	-f, 	--file 		string                Name of the Dockerfile (Default is 'PATH/Dockerfile')
+      		--force-rm                   Always remove intermediate containers
+      		--iidfile 	string             Write the image ID to the file
+      		--isolation 	string           Container isolation technology
+      		--label 	list                 Set metadata for an image
+  	-m, 	--memory 	bytes               Memory limit
+      		--memory-swap 	bytes          Swap limit equal to memory plus swap: '-1' to enable unlimited swap
+      		--network 	string             Set the networking mode for the RUN instructions during build (default "default")
+      		--no-cache                   Do not use cache when building the image
+      		--pull                       Always attempt to pull a newer version of the image
+  	-q, 	--quiet                      Suppress the build output and print image ID on success
+      		--rm                         Remove intermediate containers after a successful build (default true)
+      		--security-opt 	stringSlice   Security options
+      		--shm-size 	bytes             Size of /dev/shm
+  	-t, 	--tag 		list                   Name and optionally a tag in the 'name:tag' format
+      		--target 	string              Set the target build stage to build.
+      		--ulimit 	ulimit              Ulimit options (default [])
+
+
   commit      Create 	{a new 	image} 	from a container's changes
-  cp          Copy files/folders between a container and the local filesystem
+---
+cp	[OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-      Copy files/folders between a container and the local filesystem 		用于容器与主机之间的数据拷贝
+	[OPTIONS] SRC_PATH|- CONTAINER:DEST_PATH
+	-a, 	--archive       Archive mode (copy all uid/gid information)	
+  	-L, 	--follow-link   Always follow symbol link in SRC_PATH 			保持源目标中的链接
+	将 		主机/www/runoob目录 	拷贝到  容器96f7f14e99ab的/www目录下。
+	docker cp 	/www/runoob 			96f7f14e99ab:/www/
+	将		主机/www/runoob目录	拷贝到	容器96f7f14e99ab中，目录重命名为www。
+	docker cp 	/www/runoob 			96f7f14e99ab:/www
+	将		容器96f7f14e99ab的/www目录拷贝到主机的/tmp目录中。
+	docker cp  	96f7f14e99ab:/www 		/tmp/
+---
   create      Create 	[a new 	container]
   diff        Inspect changes to files or directories on a container's filesystem
   events      Get real time events from the server
-  exec        Run 	a command in [a running container]
+  exec	[OPTIONS] CONTAINER COMMAND [ARG...]      Run 	a command in [a running container]
+	-d, 	--detach               Detached mode: run command in the background
+      		--detach-keys string   Override the key sequence for detaching a container
+  	-e, 	--env list             Set environment variables
+  	-i, 	--interactive          Keep STDIN open even if not attached
+      		--privileged           Give extended privileges to the command
+  	-t, 	--tty                  Allocate a pseudo-TTY
+  	-u, 	--user string          Username or UID (format: <name|uid>[:<group|gid>])
+
+	
   export      Export 	a container's filesystem as a tar archive
-  history     Show the history of {an image}
-  images      List {images}
+  history	[OPTIONS] IMAGE     Show the history of {an image}
+		--format string   Pretty-print images using a Go template
+  	-H, 	--human           Print sizes and dates in human readable format (default true)
+      		--no-trunc        Don't truncate output
+  	-q, 	--quiet           Only show numeric IDs
+
+  images	[OPTIONS] [REPOSITORY[:TAG]]      List {images}
+	-a, 	--all             Show all images (default hides intermediate images)	列出本地所有的{镜像}（含中间映像层，默认情况下，过滤掉中间映像层）
+      		--digests         Show digests						显示{镜像}的摘要信息
+  	-f, 	--filter filter   Filter output based on conditions provided		显示满足条件的{镜像}
+      		--format string   Pretty-print images using a Go template		指定返回值的模板文件
+      		--no-trunc        Don't truncate output					显示完整的{镜像}信息
+  	-q, 	--quiet           Only show numeric IDs					只显示镜像ID
+
   import      Import the contents from a tarball to create a filesystem image
   info        Display system-wide information
   inspect     Return low-level information on Docker objects
@@ -246,18 +308,20 @@ Commands:
   rename   	CONTAINER NEW_NAME   		Rename 	[a container]
   restart 	[OPTIONS] CONTAINER [CONTAINER...]    	Restart 	[one or more containers]
 	-t, 	--time int   			Seconds to wait for stop before killing the container (default 10)
-  rm    	[OPTIONS] CONTAINER [CONTAINER...]      Remove 	[one or more containers] 				删除一个或多个容器
-	-f, 	--force     				Force the removal of a running container (uses SIGKILL)
-  	-l, 	--link      				Remove the specified link
-  	-v, 	--volumes   				Remove the volumes associated with the container
-  rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
-	-f, 	--force      				Force removal of the image
+---
+rm    	[OPTIONS] CONTAINER [CONTAINER...]      Remove 	[one or more containers] 				删除一个或多个容器
+	-f, 	--force     				Force  the removal of [a running container](uses SIGKILL) 	通过SIGKILL信号强制删除一个运行中的容器
+  	-l, 	--link      				Remove the specified link					移除容器间的网络连接，而非容器本身
+  	-v, 	--volumes   				Remove the volumes associated with [the container]		删除与容器关联的卷
+---  
+rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
+	-f, 	--force      				Force removal of {the image}
       		--no-prune   				Do not delete untagged parents
-	
+---
 
   run   	[OPTIONS] IMAGE [COMMAND] [ARG...]      Run a command in [a new container]
 		--add-host 	list                  	Add a custom host-to-IP mapping (host:ip)
-  	-a, 	--attach 	list                    Attach to STDIN, STDOUT or STDERR
+  	-a, 	--attach 	list                    Attach to STDIN, STDOUT or STDERR 		指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项
       		--blkio-weight 	uint16            	Block IO (relative weight), between 10 and 1000, or 0 to disable (default 0)
       		--blkio-weight-device list       	Block IO weight (relative device weight) (default [])
       		--cap-add 	list                   	Add Linux capabilities
@@ -281,9 +345,9 @@ Commands:
       		--device-write-bps 	list          	Limit write rate (bytes per second) to a device (default [])
       		--device-write-iops 	list         	Limit write rate (IO per second) to a device (default [])
       		--disable-content-trust          	Skip image verification (default true)
-      		--dns 			list            Set custom DNS servers
-      		--dns-option 		list            Set DNS options
-      		--dns-search 		list            Set custom DNS search domains
+      		--dns 			list            Set custom DNS servers 		指定容器使用的DNS服务器，默认和宿主一致(8.8.8.8)
+      		--dns-option 		list            Set DNS options	
+      		--dns-search 		list            Set custom DNS search domains 	指定容器DNS搜索域名，默认和宿主一致(example.com)
       		--entrypoint 		string          Overwrite the default ENTRYPOINT of the image
   	-e, 	--env 			list            Set environment variables
 		--env-file 		list            Read in a file of environment variables
@@ -296,7 +360,7 @@ Commands:
       		--health-timeout 	duration        Maximum time to allow one check to run (ms|s|m|h) (default 0s)
   	-h, 	--hostname 		string          Container host name
       		--init                  		Run an init inside the container that forwards signals and reaps processes
-  	-i, 	--interactive                    	Keep STDIN open even if not attached
+  	-i, 	--interactive                    	Keep STDIN open even if not attached 			以交互模式运行容器，通常与 -t 同时使用
       		--ip 			string          IPv4 address (e.g., 172.30.100.104)
       		--ip6 			string          IPv6 address (e.g., 2001:db8::33)
       		--ipc 			string          IPC namespace to use
@@ -314,7 +378,7 @@ Commands:
       		--memory-swap 		bytes           Swap limit equal to memory plus swap: '-1' to enable unlimited swap
       		--memory-swappiness 	int          	Tune container memory swappiness (0 to 100) (default -1)      
 		--mount 		mount           Attach a filesystem mount to the container
-      		--name 			string          Assign a name to the container
+      		--name 			string          Assign a name to the container 					为容器指定一个名称
       		--network 		string          Connect a container to a network (default "default")
       		--network-alias 	list            Add network-scoped alias for the container
       		--no-healthcheck                 	Disable any container-specified HEALTHCHECK
@@ -337,7 +401,7 @@ Commands:
       		--storage-opt 		list            Storage driver options for the container
       		--sysctl 		map             Sysctl options (default map[])
       		--tmpfs 		list            Mount a tmpfs directory
-  	-t, 	--tty                            	Allocate a pseudo-TTY
+  	-t, 	--tty                            	Allocate a pseudo-TTY 			为容器重新分配一个伪输入终端，通常与 -i 同时使用
       		--ulimit 		ulimit          Ulimit options (default [])
   	-u, 	--user 			string          Username or UID (format: <name|uid>[:<group|gid>])
       		--userns 		string          User namespace to use
@@ -355,8 +419,9 @@ Commands:
   top         Display 	the running processes of[a container]
   unpause     Unpause all processes within 	[one or more containers]
   update      Update configuration of 		[one or more containers]
-  version     Show the Docker version information
-  wait        Block until 			[one or more containers] stop, then print their exit codes
-
+  version	[OPTIONS]     Show the Docker version information
+	-f, 	--format string   	Format the output using the given Go template
+  wait  CONTAINER [CONTAINER...]      	Block until 			[one or more containers] stop, then print their exit codes
+	
 Run 'docker COMMAND --help' for more information on a command.
 
