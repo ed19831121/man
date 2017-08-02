@@ -1,0 +1,26 @@
+无论使用何种服务端技术，只要'发送回的HTTP响应中'包含'如下形式的头'，则视为服务器要求设置一个cookie：
+Set-cookie:
+	name	=name;
+	expires	=date;
+	path	=path;
+	domain	=domain
+支持cookie的浏览器都会对此作出反应，即创建cookie文件并保存（也可能是内存cookie），用户以后在每次发出请求时，浏览器都要判断当前所有的cookie中有没有没失效（根据expires属性判断）并且匹配了path属性的cookie信息，如果有的话，会以下面的形式加入到请求头中发回服务端：
+
+Cookie: 
+	name="zj"; 
+	Path="/linkage"
+
+    服务端的动态脚本会对其进行分析，并做出相应的处理，当然也可以选择直接忽略
+
+
+    path：		表示 cookie 影响到的路径，匹配该路径才发送这个 cookie。
+    expires 和 maxAge：	告诉浏览器这个 cookie 什么时候过期，
+			expires 是 UTC 格式时间，
+			maxAge 是 cookie 多久后过期的相对时间。
+			当不设置这两个选项时，会产生 session cookie，
+			session cookie 是 transient 的，当用户关闭浏览器时，就被清除。
+			一般用来保存 session 的 session_id。
+    secure：		当 secure 值为 true 时，cookie 在 HTTP 中是无效，在 HTTPS 中才有效。
+    httpOnly：		浏览器不允许脚本操作 document.cookie 去更改 cookie。
+			一般情况下都应该设置这个为 true，这样可以避免被 xss 攻击拿到 cookie。
+

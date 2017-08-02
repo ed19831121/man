@@ -1,0 +1,66 @@
+data-type:
+	SMALLINT
+	INTEGER
+	INT
+	BIGINT
+	FLOAT(integer)
+	REAL 	PRECISION
+	DOUBLE
+DECIMAL
+DEC
+( integer
+)
+NUMERIC
+,integer
+NUM
+	CHARACTER
+	CHAR
+(integer)
+(2)
+VARCHAR
+( integer )
+CHARACTER
+VARYING
+CHAR
+LONG VARCHAR
+BLOB
+BINARY LARGE OBJECT
+( integer
+CLOB
+K
+CHARACTER
+LARGE OBJECT
+M
+CHAR
+G
+DBCLOB
+GRAPHIC
+(integer)
+VARGRAPHIC (integer)
+LONG VARGRAPHIC
+DATE
+TIME
+TIMESTAMP
+XML
+distinct-type-name
+structured-type-name
+REF (type-name2)
+SYSPROC.
+(3) (4)
+DB2SECURITYLABEL
+duration-label:
+	1. YEAR
+	   YEARS
+	2. MONTH
+	   MONTHS
+	3. DAY
+	   DAYS
+	4. HOUR
+	   HOURS
+	5. MINUTE
+	   MINUTES
+	6. SECOND
+	   SECONDS
+	7. MICROSECOND
+	   MICROSECONDS
+

@@ -1,4 +1,9 @@
+repository
+image
+container
+---
     先删除依赖该镜像的所有容器，再来删除镜像.
+	docker images
 	docker ps
 	docker rm 	$id
 	docker rmi	
@@ -7,48 +12,52 @@
 删除所有 Docker 镜像	docker rmi $(docker images -q)
 
 
-	docker attach命令-	登录一个已经在执行的容器 (link is external)
-    docker build 命令-	建立一个新的image (link is external)
-    docker commit命令-	提交一个新的image (link is external)
-    docker cp命令-	将容器中的文件拷贝到主机上 (link is external)
-    docker daemon命令-	docker运行可指定项详解 (link is external)
-    docker diff命令-	较一个容器不同版本提交的文件差异 (link is external)
-    docker events命令-	获取sever中的实时事件 (link is external)
-    docker export命令-	导出一个容器 (link is external)
-    docker history命令-	显示一个image的历史 (link is external)
-    docker images命令-	列出image (link is external)
-    docker import命令-	导入已有的image (link is external)
-    docker info命令-	展示docker的信息 (link is external)
-    docker inspect命令-	显示更底层的容器或image信息 (link is external)
-    docker kill命令-	杀死docker进程 (link is external)
-    docker load命令-	加载image (link is external)
-    docker login命令-	登录docker注册服务器 (link is external)
-    docker logs命令-	获取容器的日志 (link is external)
-    docker pause命令-	暂停容器中的所有进程 (link is external)
-    docker port命令 	端口转发 (link is external)
-    
-	docker pull命令-	从远端拉取一个image (link is external)
-    	docker push命令-	推送image到注册服务器 (link is external)
-    	docker rmi命令-	删除image (link is external)
-    
-	docker ps命令-	列出所有容器 (link is external)
-    	docker rm命令-	删除一个或多个容器 (link is external)
-    	docker start命令-	启动一个容器 (link is external)
-    	docker restart命令-	重启一个容器或多个容器 (link is external)
-    	docker stop命令-	停止一个容器 (link is external)
-    
-    docker run命令-	运行一个新的容器 (link is external)
-    docker save命令-	打包image (link is external)
-    docker search命令-	搜索images (link is external)
-    docker tag命令-	为image打标签 (link is external)
-    docker top命令-	显示容器中的进程 (link is external)
-    docker unpause命令-	取消暂停所有的进程 (link is external)
-    docker version命令-	显示版本信息 (link is external)
-    docker wait命令-	阻塞容器运行 (link is external)
+	docker attach命令-	登录一个已经在执行的容器 
+    docker build 命令-	建立一个新的image 
+    docker commit命令-	提交一个新的image 
+    docker cp命令-	将容器中的文件拷贝到主机上 
+    docker daemon命令-	docker运行可指定项详解 
+    docker diff命令-	较一个容器不同版本提交的文件差异 
+    docker events命令-	获取sever中的实时事件 
+    docker export命令-	导出一个容器 
+    docker history命令-	显示一个image的历史 
+    docker images命令-	列出image 
+    docker import命令-	导入已有的image 
+    docker info命令-	展示docker的信息 
+    docker inspect命令-	显示更底层的容器或image信息 
+    docker kill命令-	杀死docker进程 
+    docker load命令-	加载image 
+    docker login命令-	登录docker注册服务器 
+    docker logs命令-	获取容器的日志 
+    docker pause命令-	暂停容器中的所有进程 
+    docker port命令 	端口转发 
 
-Usage:	docker COMMAND
-
-A self-sufficient runtime for containers
+	docker commit 	-p 30b8f18f20b4 		container-backup		选择想要备份的容器，然后创建该容器的快照
+    	docker tag a25ddfec4d2a arunpyasi/container-backup:test
+	docker push arunpyasi/container-backup						推送image到注册服务器 
+	docker pull arunpyasi/container-backup:test					从远端拉取一个image 
+	
+	docker save 	-o ~/container-backup.tar 	container-backup 		保存将此镜像在本地机器为tar  	(-o xx.tari)	
+	docker load 	-i ~/container-backup.tar	
+			
+    	docker rmi命令-	删除image 
+    
+	docker ps命令-	列出所有容器 
+    	docker rm命令-	删除一个或多个容器 
+    	docker start命令-	启动一个容器 
+    	docker restart命令-	重启一个容器或多个容器 
+    	docker stop命令-	停止一个容器 
+    
+    docker run命令-	运行一个新的容器 
+    docker save命令-	打包image 
+    docker search命令-	搜索images 
+    docker tag命令-	为image打标签 
+    docker top命令-	显示容器中的进程 
+    docker unpause命令-	取消暂停所有的进程 
+    docker version命令-	显示版本信息 
+    docker wait命令-	阻塞容器运行 
+---
+Usage:	docker COMMAND			A self-sufficient runtime for containers
 
 Options:
       --config 		string     	Location of client config files (default "/home/linux/.docker")
@@ -278,9 +287,16 @@ cp	[OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-      Copy files/folders between a co
   inspect     Return low-level information on Docker objects
   kill        Kill 						[one or more running containers]
   load        Load 	{an image} from a tar archive or STDIN
-  login	 [OPTIONS] [SERVER]        Log in 	to 	a Docker registry
+---  
+login	 [OPTIONS] [SERVER]        	Log in 	to 	a Docker registry 
+					Register or log in to <a Docker registry server>,
+					if no server is specified "https://index.docker.io/v1/"is the default.
+						-e,	--email=""		Email
+						-p,	--password=""		Password
+						-u,	--username=""		Username 
 	-p, 	--password string   	Password
   	-u, 	--username string   	Username
+---
   logout [SERVER]      Log out 	from 	a Docker registry
 
   logs 	[OPTIONS] CONTAINER       Fetch the logs of 				[a container]
@@ -300,10 +316,10 @@ cp	[OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-      Copy files/folders between a co
       		--no-trunc        Don't truncate output
   	-q, 	--quiet           Only display numeric IDs
   	-s, 	--size            Display total file sizes
-  pull  	[OPTIONS] NAME[:TAG|@DIGEST]      	Pull {an image} or a repository from a registry
+  pull  	[OPTIONS] NAME[:TAG|@DIGEST]      	Pull {an image} or a repository from a registry		恢复容器从hub.docker.com
 	-a, 	--all-tags                	Download all tagged images in the repository
       		--disable-content-trust   	Skip image verification (default true)
-  push  	[OPTIONS] NAME[:TAG]       	Push {an image} or a repository to 	 a registry
+  push  	[OPTIONS] NAME[:TAG]       	Push {an image} or a repository to 	 a registry 		备份容器到hub.docker.com
 	--disable-content-trust   		Skip image signing (default true)
   rename   	CONTAINER NEW_NAME   		Rename 	[a container]
   restart 	[OPTIONS] CONTAINER [CONTAINER...]    	Restart 	[one or more containers]
@@ -410,13 +426,14 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--volume-driver 	string          Optional volume driver for the container
       		--volumes-from 		list            Mount volumes from the specified container(s)
   	-w, 	--workdir 		string          Working directory inside the container
-  save        Save 			{one or more images} to a tar archive (streamed to STDOUT by default)
+  save        	[OPTIONS] IMAGE [IMAGE...]		Save 		{one or more images} to a tar archive (streamed to STDOUT by default)
+		-o, --output string   Write to a file, instead of STDOUT
   search      Search the Docker Hub for {images}
   start       Start 				[one or more stopped containers]
   stats       Display a live stream of container(s) resource usage statistics
   stop        Stop 				[one or more running containers]
-  tag         Create 	a tag TARGET_IMAGE that refers to SOURCE_IMAGE
-  top         Display 	the running processes of[a container]
+  tag         SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG] 			Create 	a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         CONTAINER [ps OPTIONS] 					Display 	the running processes of[a container]
   unpause     Unpause all processes within 	[one or more containers]
   update      Update configuration of 		[one or more containers]
   version	[OPTIONS]     Show the Docker version information
