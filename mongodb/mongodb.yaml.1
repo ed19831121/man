@@ -1,0 +1,59 @@
+systemLog:
+	destination: 		file				//指定是一个文件
+  	path: 			/data/logs/mongod.log		//日志存放位置
+  	logAppend: 		true				//产生日志内容追加到文件
+	quiet: 			true				//在quite模式下会限制输出信息
+	timeStampFormat: 	iso8601-utc 			//默认是iso8601-local，日志信息中还有其他时间戳格式：ctime,iso8601-utc,iso8601-local
+processManagement:
+	fork: 			true				//以守护进程的方式运行MongoDB，创建服务器进程
+  	pidFilePath: 		"/data/mongo-data/mongod.pid"	//pid文件路径
+net:
+	bindIp: 		192.168.33.131			//绑定ip地址访问mongodb，多个ip逗号分隔
+  	port: 			27017				//端口
+  	maxIncomingConnections：10000				//默认65535，mongodb实例接受的最多连接数，如果高于操作系统接受的最大线程数，设置无效。
+http:
+	enabled: 		true				//http端口最好关闭
+	RESTInterfaceEnabled: 	false				//即使http接口选项关闭，如果这个选项打开后会有更多的不安全因素
+storage:
+	dbPath: 		"/data/mongo-data"		//数据文件存放路径
+	engine: 		wiredTiger			//数据引擎
+	wiredTiger:
+    		engineConfig:					//wt引擎配置
+      cacheSizeGB: 1//看服务器情况来进行设置
+      directoryForIndexes: true//索引是否按数据库名进行单独存储
+    	collectionConfig:
+      		blockCompressor: zlib//压缩配置
+    	indexConfig:
+      prefixCompression: true//索引配置
+  	journal:
+    		enabled: true					//记录操作日志，防止数据丢失。
+  	directoryPerDB: true				//指定存储每个数据库文件到单独的数据目录。如果在一个已存在的系统使用该选项，需要事先把存在的数据文件移动到目录。
+operationProfiling:
+  	slowOpThresholdMs: 	100 				//指定慢查询时间，单位毫秒，如果打开功能，则向system.profile集合写入数据
+  	mode: 			"slowOp"			//off、slowOp、all，分别对应关闭，仅打开慢查询，记录所有操作。
+security:
+  	keyFile: 		"/data/mongodb-keyfile"		//指定分片集或副本集成员之间身份验证的key文件存储位置
+  	clusterAuthMode: 	"keyFile"			//集群认证模式，默认是keyFile
+  	authorization: 		"disabled"			//访问数据库和进行操作的用户角色认证
+
+replication:
+	oplogSizeMB: 		50				//默认为磁盘的5%,指定oplog的最大尺寸。对于已经建立过oplog.rs的数据库，指定无效
+	replSetName: 		"rs_zxl"			//指定副本集的名称
+	secondaryIndexPrefetch: "all"				//指定副本集成员在接受oplog之前是否加载索引到内存。默认会加载所有的索引到内存。
+								//none不加载;all加载所有;_id_only仅加载_id
+replication: 							//分片集群配置，分片复制集配置(单实例节点的基础上)
+	oplogSizeMB：		50
+	replSetName: 		"rs_zxl"
+sharding:
+	clusterRole: 		shardsv
+sharding:							//config server配置（单实例节点的基础上）
+	clusterRole: configsvr
+
+systemLog：
+	destination: 		file
+	path: 			/data/logs/mongos.log
+	logAppend: 		true
+net:
+  	port: 			27019
+sharding:
+  	configDB: 		192.168.33.131:30000
