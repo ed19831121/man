@@ -1,0 +1,57 @@
+version: "2" services:
+ console:
+  build:
+   context: ./images/console
+    args:
+     - USERPASS=root
+     - GIT_NAME=yangnan
+     - GIT_EMAIL=20706149@qq.com
+     - INSTALL_YARN=false
+    volumes_from:
+     - php-fpm
+     - nginx
+     - mysql
+     - redis
+        volumes:
+            - ./ssh:/home/www-data/.ssh
+        links:
+            - redis
+            - mysql
+        tty: true
+
+    php-fpm:
+        build: ./images/php-fpm
+        volumes:
+            - ./app/:/var/www/
+
+    nginx:
+        image: nginx
+        ports:
+            - "8081:80"
+        volumes_from:
+            - php-fpm
+        volumes:
+            - ./logs/nginx/:/var/log/nginx/
+            - ./images/nginx/sites:/etc/nginx/conf.d/
+        links:
+            - php-fpm
+
+    mysql:
+        image: mysql
+        ports:
+            - "7706:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: "123"
+            MYSQL_DATABASE: "test"
+            MYSQL_USER: "root"
+            MYSQL_PASSWORD: "123"
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - ./data/redis:/data
+

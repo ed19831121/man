@@ -1,25 +1,29 @@
-docker-compose			Define and run multi-container applications with Docker.
-Usage:
-	docker-compose 	[-f <arg>...] [options] [COMMAND] [ARGS...]
-  	docker-compose 	-h|--help
-Options:
-  -f, 	--file 			FILE   	Specify an alternate Compose file 	(default: docker-compose.yml)
-  -p, 	--project-name 		NAME   	Specify an alternate project name 	(default: directory name)
-  	--project-directory 	PATH   	Specify an alternate working directory  (default: the path of the Compose file)
-  	--verbose               	Show more output
-  -v, 	--version               	Print version and exit
-  -H, 	--host HOST             	Daemon socket to connect to
+Define and run multi-container applications with Docker.
 
-  	--tls                       		Use TLS; implied by --tlsverify
-  	--tlscacert 	CA_PATH         	Trust certs signed only by this CA
-  	--tlscert 	CLIENT_CERT_PATH  	Path to TLS certificate file
-  	--tlskey 	TLS_KEY_PATH       	Path to TLS key file
-  	--tlsverify                 		Use TLS and verify the remote
-  	--skip-hostname-check       		Don't check the daemon's hostname against the name specified in the client certificate 
-						(for example if your docker host is an IP address)
+Usage:
+  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+
+Options:
+  -f, --file FILE             Specify an alternate compose file (default: docker-compose.yml)
+  -p, --project-name NAME     Specify an alternate project name (default: directory name)
+  --verbose                   Show more output
+  -v, --version               Print version and exit
+  -H, --host HOST             Daemon socket to connect to
+
+  --tls                       Use TLS; implied by --tlsverify
+  --tlscacert CA_PATH         Trust certs signed only by this CA
+  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
+  --tlskey TLS_KEY_PATH       Path to TLS key file
+  --tlsverify                 Use TLS and verify the remote
+  --skip-hostname-check       Don't check the daemon's hostname against the name specified
+                              in the client certificate (for example if your docker host
+                              is an IP address)
+  --project-directory PATH    Specify an alternate working directory
+                              (default: the path of the Compose file)
 
 Commands:
-  build              Build or rebuild services
+  build              Build or rebuild services						构建或重建服务
   bundle             Generate a Docker bundle from the Compose file
   config             Validate and view the Compose file
   create             Create services
@@ -31,7 +35,7 @@ Commands:
   kill               Kill containers
   logs               View output from containers
   pause              Pause services
-  port               Print the public port for a port binding
+  port               Print the public port for a port binding				打印绑定的开放端口
   ps                 List containers
   pull               Pull service images
   push               Push service images
@@ -45,30 +49,4 @@ Commands:
   unpause            Unpause services
   up                 Create and start containers
   version            Show the Docker-Compose version information
-
-build
-bundle
-config
-create
-down
-events
-exec
-help
-images
-kill
-logs
-pause
-port
-ps
-pull
-push
-restart
-rm
-run
-scale
-start
-stop
-top
-unpause
-up
 

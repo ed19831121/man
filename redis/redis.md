@@ -1,3 +1,9 @@
+strings 
+hashes 
+lists 
+sets 
+sorted sets
+---
 APPEND		key 		value 		Append a value to a key
 AUTH 		password 			Authenticate to the server
 BGREWRITEAOF 					Asynchronously rewrite the append-only file
