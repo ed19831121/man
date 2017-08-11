@@ -234,6 +234,8 @@ Commands:
       		--pull                       Always attempt to pull a newer version of the image
   	-q, 	--quiet                      Suppress the build output and print image ID on success
       		--rm                         Remove intermediate containers after a successful build (default true)
+						容器停止后自动删除容器(不支持以docker run -d启动的容器)
+						用在-it启动的容器后
       		--security-opt 	stringSlice   Security options
       		--shm-size 	bytes             Size of /dev/shm
   	-t, 	--tag 		list                   Name and optionally a tag in the 'name:tag' format
@@ -390,11 +392,13 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--log-opt 		list            Log driver options
       		--mac-address 		string          Container MAC address (e.g., 92:d0:c6:0a:29:33)
   	-m, 	--memory 		bytes           Memory limit
+							指定容器的内存上限			
       		--memory-reservation 	bytes       	Memory soft limit
       		--memory-swap 		bytes           Swap limit equal to memory plus swap: '-1' to enable unlimited swap
       		--memory-swappiness 	int          	Tune container memory swappiness (0 to 100) (default -1)      
 		--mount 		mount           Attach a filesystem mount to the container
-      		--name 			string          Assign a name to the container 					为容器指定一个名称
+      		--name 			string          Assign a name to the container 					
+							指定容器名字，后续可以通过名字进行容器管理，--link特性需要使用名字
       		--network 		string          Connect a container to a network (default "default")
       		--network-alias 	list            Add network-scoped alias for the container
       		--no-healthcheck                 	Disable any container-specified HEALTHCHECK
@@ -426,6 +430,7 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--volume-driver 	string          Optional volume driver for the container
       		--volumes-from 		list            Mount volumes from the specified container(s)
   	-w, 	--workdir 		string          Working directory inside the container
+							指定容器的工作目录
   save        	[OPTIONS] IMAGE [IMAGE...]		Save 		{one or more images} to a tar archive (streamed to STDOUT by default)
 		-o, --output string   Write to a file, instead of STDOUT
   search      Search the Docker Hub for {images}
