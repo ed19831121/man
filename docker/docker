@@ -368,6 +368,7 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--dns-search 		list            Set custom DNS search domains 	指定容器DNS搜索域名，默认和宿主一致(example.com)
       		--entrypoint 		string          Overwrite the default ENTRYPOINT of the image
   	-e, 	--env 			list            Set environment variables
+							指定环境变量，容器中可以使用该环境变量 
 		--env-file 		list            Read in a file of environment variables
 		--expose 		list            Expose a port or a range of ports
 		--group-add 		list            Add additional groups to join     
@@ -377,8 +378,10 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--health-start-period 	duration   	Start period for the container to initialize before starting health-retries countdown (ms|s|m|h) (default 0s)
       		--health-timeout 	duration        Maximum time to allow one check to run (ms|s|m|h) (default 0s)
   	-h, 	--hostname 		string          Container host name
+							指定容器的主机名
       		--init                  		Run an init inside the container that forwards signals and reaps processes
   	-i, 	--interactive                    	Keep STDIN open even if not attached 			以交互模式运行容器，通常与 -t 同时使用
+							打开STDIN，用于控制台交互
       		--ip 			string          IPv4 address (e.g., 172.30.100.104)
       		--ip6 			string          IPv6 address (e.g., 2001:db8::33)
       		--ipc 			string          IPC namespace to use
@@ -422,11 +425,13 @@ rmi   	[OPTIONS] IMAGE [IMAGE...]      	Remove 	{one or more images}
       		--sysctl 		map             Sysctl options (default map[])
       		--tmpfs 		list            Mount a tmpfs directory
   	-t, 	--tty                            	Allocate a pseudo-TTY 			为容器重新分配一个伪输入终端，通常与 -i 同时使用
+							分配tty设备，该可以支持终端登录
       		--ulimit 		ulimit          Ulimit options (default [])
   	-u, 	--user 			string          Username or UID (format: <name|uid>[:<group|gid>])
       		--userns 		string          User namespace to use
       		--uts 			string          UTS namespace to use
   	-v, 	--volume 		list            Bind mount a volume
+							给容器挂载存储卷，挂载到容器的某个目录
       		--volume-driver 	string          Optional volume driver for the container
       		--volumes-from 		list            Mount volumes from the specified container(s)
   	-w, 	--workdir 		string          Working directory inside the container

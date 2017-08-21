@@ -3,15 +3,15 @@ Usage: split [OPTION]... [FILE [PREFIX]]		Output pieces of FILE to PREFIXaa, PRE
 如果没有指定文件，或者文件为"-"，则从标准输入读取。
 
 必选参数对长短选项同时适用。
-  -a, --suffix-length=N   		generate suffixes of length N (default 2)
-      --additional-suffix=SUFFIX  	append an additional SUFFIX to file names
-  -b, --bytes=SIZE        		put SIZE bytes per output file
-  -C, --line-bytes=SIZE   		put at most SIZE bytes of records per output file
-  -d                      		use numeric suffixes starting at 0, not alphabetic
+  -a, --suffix-length=N   		generate suffixes of length N (default 2)		指定拆分文件的后缀长度
+      --additional-suffix=SUFFIX  	append an additional SUFFIX to file names		
+  -b, --bytes=SIZE        		put SIZE bytes per output file				按字节拆分，默认单位字节
+  -C, --line-bytes=SIZE   		put at most SIZE bytes of records per output file	指定单行的最大大小，默认单位字节
+  -d                      		use numeric suffixes starting at 0, not alphabetic	用数字作为拆分文件的后缀
       --numeric-suffixes[=FROM]  	same as -d, but allow setting the start value
   -e, --elide-empty-files  		do not generate empty output files with '-n'
       --filter=COMMAND    		write to shell COMMAND; file name is $FILE
-  -l, --lines=NUMBER      		put NUMBER lines/records per output file
+  -l, --lines=NUMBER      		put NUMBER lines/records per output file		按行数进行拆分
   -n, --number=CHUNKS     		generate CHUNKS output files; see explanation below
   -t, --separator=SEP     		use SEP instead of newline as the record separator; '\0' (zero) specifies the NUL character
   -u, --unbuffered        		immediately copy input to output with '-n r/...'

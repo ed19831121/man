@@ -61,7 +61,7 @@ DEBUG OBJECT key 					Get debugging information about a key
 DEBUG SEGFAULT 						Make the server crash
 DECR key 						Decrement the integer value of a key by one
 DECRBY key decrement 					Decrement the integer value of a key by the given number
-DEL key [key ...] 					Delete a key
+DEL key [key ...] 					Delete a key	# key 存在时删除 key. 删除已存在的键。不存在的 key 会被忽略. 返回被删除 key 的数量。 
 DISCARD 						Discard all commands issued after MULTI
 DUMP key 						Return a serialized version of the value stored at the specified key.
 ECHO message 						Echo the given string
@@ -95,7 +95,9 @@ GEORADIUSBYMEMBER key member radius m|km|ft|mi
 	[STORE key] 
 	[STOREDIST key] 
 				Query a sorted set representing a geospatial index to fetch members matching a given maximum distance from a member
-GET key 						Get the value of a key
+GET key 						Get the value of a key 		# 获取指定 key 的值。
+											# 如果 key 不存在，返回 nil 。
+											# 如果key 储存的值不是字符串类型，返回一个错误
 GETBIT key offset 					Returns the bit value at offset in the string value stored at key
 GETRANGE key start end 					Get a substring of the string stored at a key
 GETSET key value 					Set the string value of a key and return its old value

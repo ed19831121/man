@@ -1,3 +1,53 @@
+$query = $this->db->query('SELECT name, title, email FROM my_table');
+
+result
+result_array
+row
+row_array
+$this->db->query();
+$this->db->result();
+$this->db->db_select($database2_name);
+$this->db->close();
+$this->db->set_dbprefix('newprefix');
+$this->db->dbprefix('tablename'); 	// outputs prefix_tablename
+$this->db->protect_identifiers('table_name');
+$this->db->escape()
+$this->db->escape_str()
+$this->db->escape_like_str()
+$this->db->error();
+
+
+$this->db->insert_id()			// 当执行 INSERT 语句时，返回新插入行的ID
+$this->db->affected_rows()		// 当执行 INSERT、UPDATE 等写类型的语句时，返回受影响的行数。
+$this->db->last_query()			// 返回上一次执行的查询语句（是查询语句，不是结果）。 
+$this->db->count_all()			// 获取数据表的总行数，第一个参数为表名
+$this->db->platform()			// 输出正在使用的数据库平台（MySQL，MS SQL，Postgres 等）
+$this->db->version()			// 输出正在使用的数据库版本:
+$this->db->insert_string()		// 简化了 INSERT 语句的书写，它返回一个正确格式化的 INSERT 语句
+	$data 	= array(
+			'name' 	=> $name, 
+			'email' => $email, 
+			'url' 	=> $url
+	);
+	$str 	= $this->db->insert_string('table_name', $data);
+$this->db->update_string()		// 简化了 UPDATE 语句的书写，它返回一个正确格式化的 UPDATE 语句
+	$data 	= array(
+		'name' 	=> $name, 
+		'email' => $email, 
+		'url' 	=> $url);
+	$where 	= "author_id = 1 AND status = 'active'";
+	$str 	= $this->db->update_string('table_name', $data, $where);
+
+---
+
+simple_query 函数是 $this->db->query() 的简化版。它
+	不会返回查询的结果集，
+	不会去设置查询计数器，
+	不会去编译绑定的数据，
+	不会去存储查询的调试信息。 它只是用于简单的提交一个查询，大多数用户并不会用到这个函数。
+
+
+---
 辅助函数参考					$this->load->helper("")
 	数组辅助函数		array
 		通过索引获取数组中的元素。

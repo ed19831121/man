@@ -1,3 +1,10 @@
+根实例app<-new Vue()<-路由实例router<-new VueRouter()<-路由映射数组routes<-component<-路由组件名<-template<-html
+
+routes:[path,component]
+
+$route.matched
+$route.name
+
 动态路由匹配
 
 我们经常需要把

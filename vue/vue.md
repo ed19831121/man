@@ -1,3 +1,10 @@
+
+.vue
+	<style>
+	<template>
+	<script>
+
+
 Vue
 	data:		function
 	template:	string

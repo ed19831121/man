@@ -1,0 +1,54 @@
+jqXHR	=	jQuery.ajax( 
+			url		:String 
+			[, settings ] 	:Object:{key:value}
+		)
+
+	readyState
+	responseXML 		and/or 
+	responseText 		when the underlying request responded with xml and/or text, respectively
+	status
+	statusText
+	abort( [ statusText ] )
+	getAllResponseHeaders() as a string
+	getResponseHeader( name )
+	overrideMimeType( mimeType )
+	setRequestHeader( name, value ) which departs from the standard by replacing the old value with the new one rather than concatenating the new value to the old one
+	statusCode( callbacksByStatusCode )
+
+
+
+settrings:
+	accept		String	
+	async		Boolean/true
+
+
+$.ajax(
+	{
+		accepts: {	//a given dataType -> its MIME type
+    			mycustomtype: 'application/x-some-custom-type'
+		},
+   		// Instructions for how to deserialize a `mycustomtype`
+  		converters: {
+    			'text mycustomtype': function(result) {
+      				// Do Stuff
+      				return newresult;
+    			}
+  		},
+		// Expect a `mycustomtype` back from server
+		dataType: 'mycustomtype'
+});
+
+
+queryString	"key1=  value1 & key2=  value2 " 	
+query 		{key1: 'value1', key2: 'value2'}
+
+
+
+
+
+
+	[. beforeSend( 	jqXHR jqXHR, PlainObject 	settings ) 			Returning false in the beforeSend() will cancel the request
+	0. dataFilter, 
+	1. success  
+	2. error( 		jqXHR jqXHR, String 		textStatus )
+	]. complete
